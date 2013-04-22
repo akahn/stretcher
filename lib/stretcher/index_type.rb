@@ -31,13 +31,17 @@ module Stretcher
     end
 
     # Index an item with a specific ID
-    def put(id, source)
-      request(:put, id, source)
+    def put(id, source, options={})
+      request(:put, id, options) do |req|
+        req.body = source
+      end
     end
 
     # Index an item with automatic ID generation
-    def post(source)
-      request(:post, nil, source)
+    def post(source, options={})
+      request(:post, nil, options) do |req|
+        req.body = source
+      end
     end
 
     # Uses the update api to modify a document with a script
